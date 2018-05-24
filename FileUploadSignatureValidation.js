@@ -3,10 +3,6 @@ const crypto = require('crypto');
 const http = require('http');
 const fs = require('fs');
 const formidable = require('formidable');
-var ursa = require('ursa');
-//var myPrivateKey = ursa.createPrivateKey(fs.readFileSync('./keys/myPrivateKey.pem'));
-var myPublicKey = ursa.createPublicKey(fs.readFileSync('./keys/myPublicKey.pem'));
-
 const options = {
 	
 };
@@ -32,14 +28,8 @@ http.createServer(function (req, res) {
 	          next(err);
 	        }
 		});
-		//form.onPart = function(part) {
-		//	console.log("onPart");
-		//	console.log(part);
-		//	form.handlePart(part);
-		//}
 		form.on('field', function(name, value) {
 			sig = value;
-			//console.log('Setting File signature key:', sig);
 		});
 
 		form.on('fileBegin', function(name, file) {
